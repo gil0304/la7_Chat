@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="時刻設定"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/monday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/monday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="月曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/monday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tuesday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/monday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tuesday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="火曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/tuesday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wednesday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tuesday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/wednesday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="水曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/wednesday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thursday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/wednesday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/thursday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="木曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/thursday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/friday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/thursday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/friday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="金曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/friday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/saturday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/friday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/saturday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="土曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/saturday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sunday_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/saturday_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/sunday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="日曜日"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/sunday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--:--"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

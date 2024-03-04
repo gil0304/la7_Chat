@@ -1,6 +1,9 @@
 package app.ochiai.gil.chat
 
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setupTimePicker(binding.sundayTime, Calendar.SUNDAY)
 
         binding.saveButton.setOnClickListener {
-            // 保存ロジックを実装
+            saveTimePreferences()
         }
     }
 
@@ -35,5 +38,34 @@ class MainActivity : AppCompatActivity() {
             }, 12, 0, true)
             timePickerDialog.show()
         }
+    }
+
+    private fun saveTimePreferences() {
+        val sharedPref = getSharedPreferences("WeekdayTimes", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+        // 各曜日の時間を保存
+        saveTimeForDay(editor, "MondayTime", binding.mondayTime.text.toString())
+        saveTimeForDay(editor, "TuesdayTime", binding.tuesdayTime.text.toString())
+        saveTimeForDay(editor, "WednesdayTime", binding.wednesdayTime.text.toString())
+        saveTimeForDay(editor, "ThursdayTime", binding.thursdayTime.text.toString())
+        saveTimeForDay(editor, "FridayTime", binding.fridayTime.text.toString())
+        saveTimeForDay(editor, "SaturdayTime", binding.saturdayTime.text.toString())
+        saveTimeForDay(editor, "SundayTime", binding.sundayTime.text.toString())
+
+        editor.apply()
+    }
+
+    private fun saveTimeForDay(editor: SharedPreferences.Editor, key: String, time: String) {
+        if (time != "--:--") { // "--:--"の時は保存しない
+            editor.putString(key, time)
+        } else {
+            editor.remove(key) // 既存の時間をクリア
+        }
+    }
+
+    private fun navigateToIconSettingActivity() {
+        val intent = Intent(this, IconSettingActivity::class.java)
+        startActivity(intent)
     }
 }

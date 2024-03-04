@@ -6,4 +6,327 @@
     android:layout_height="match_parent"
     tools:context=".IconSettingActivity">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="相手のアイコンを作る"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@id/create_button"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:id="@+id/gender_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/gender_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="性別"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/gender_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="女の子"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/age_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/gender_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/age_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="性別"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/age_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="21歳くらい"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hairstyle_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/age_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/hairstyle_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="髪型"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/hairstyle_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="ショートカット"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hair_color_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/hairstyle_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/hair_color_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="髪色"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/hair_color_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="黒"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/eyes_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/hair_color_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/eyes_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="目元"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/eyes_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="吊り目"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nose_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/eyes_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/nose_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="鼻"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/nose_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="特に指定なし"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mouth_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/nose_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/mouth_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="口"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/mouth_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="特に指定なし"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/mouth_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/ear_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="耳"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/ear_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="ピアスをちょっとつけてる"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/style_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/ear_layout"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/style_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="雰囲気"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/style_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="日本人、クール"
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="作成"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

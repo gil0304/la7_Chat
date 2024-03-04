@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupTimePicker(binding.mondayTime, Calendar.MONDAY)
-        setupTimePicker(binding.thursdayTime, Calendar.THURSDAY)
+        setupTimePicker(binding.tuesdayTime, Calendar.TUESDAY)
         setupTimePicker(binding.wednesdayTime, Calendar.WEDNESDAY)
         setupTimePicker(binding.thursdayTime, Calendar.THURSDAY)
         setupTimePicker(binding.fridayTime, Calendar.FRIDAY)
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener {
             saveTimePreferences()
+            navigateToIconSettingActivity()
         }
     }
 

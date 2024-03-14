@@ -23,6 +23,19 @@ class IconSettingActivity : AppCompatActivity() {
             setContentView(this.root)
         }
 
+        if (getSharedPreferences("IconPrompt", Context.MODE_PRIVATE) != null) {
+            val sharedPref = getSharedPreferences("IconPrompt", Context.MODE_PRIVATE)
+            binding.genderText.setText(sharedPref.getString("GenderPrompt", "特に指定なし"))
+            binding.ageText.setText(sharedPref.getString("AgePrompt", "特に指定なし"))
+            binding.hairstyleText.setText(sharedPref.getString("HairstylePrompt", "特に指定なし"))
+            binding.hairColorText.setText(sharedPref.getString("HairColorPrompt", "特に指定なし"))
+            binding.eyesText.setText(sharedPref.getString("EyesPrompt", "特に指定なし"))
+            binding.noseText.setText(sharedPref.getString("NosePrompt", "特に指定なし"))
+            binding.mouthText.setText(sharedPref.getString("MouthPrompt", "特に指定なし"))
+            binding.earText.setText(sharedPref.getString("EarPrompt", "特に指定なし"))
+            binding.styleText.setText(sharedPref.getString("StylePrompt", "特に指定なし"))
+        }
+
         binding.createButton.setOnClickListener {
             saveIconPromptPreferences()
             val sharedPref = getSharedPreferences("IconPrompt", Context.MODE_PRIVATE)
@@ -68,7 +81,7 @@ class IconSettingActivity : AppCompatActivity() {
         }
     }
 
-    private fun generateImage(prompt: String) {
+     private fun generateImage(prompt: String) {
         val logging = HttpLoggingInterceptor().apply{
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -84,7 +97,6 @@ class IconSettingActivity : AppCompatActivity() {
 
         val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
         val body = createJsonRequestBody(prompt).toRequestBody(mediaType)
-        println("bodyyy:${createJsonRequestBody(prompt)}")
         val request = Request.Builder()
             .url("https://api.openai.com/v1/images/generations")
             .post(body)
@@ -95,7 +107,7 @@ class IconSettingActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                println("Erroreeee: ${e.message}")
+                println("Error: ${e.message}")
                 hideLoading()
                 // エラーハンドリング
             }
@@ -106,12 +118,8 @@ class IconSettingActivity : AppCompatActivity() {
 
                     val responseBody = it.body?.string()
                     val imageUrl = parseImageUrl(responseBody)
-                    val sharedPref = getSharedPreferences("Icon", Context.MODE_PRIVATE)
-                    sharedPref.edit().putString("ImageUrl", imageUrl).apply()
-                    println("imageUrl:${imageUrl}")
                     runOnUiThread {
                         hideLoading()
-                        println("seikou")
                         navigateToConfirmationScreen(imageUrl)
                     }
                 }
@@ -119,7 +127,7 @@ class IconSettingActivity : AppCompatActivity() {
         })
     }
 
-    private fun createJsonRequestBody(prompt: String): String {
+     fun createJsonRequestBody(prompt: String): String {
         val requestBody = mapOf(
             "prompt" to prompt,
             "model" to "dall-e-3",
@@ -130,7 +138,7 @@ class IconSettingActivity : AppCompatActivity() {
         return Gson().toJson(requestBody)
     }
 
-    private fun parseImageUrl(jsonResponse: String?): String {
+    fun parseImageUrl(jsonResponse: String?): String {
         // JSONレスポンスから画像URLを抽出
         if (jsonResponse.isNullOrEmpty()) return ""
 

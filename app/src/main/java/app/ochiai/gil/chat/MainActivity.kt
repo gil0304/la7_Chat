@@ -1,5 +1,7 @@
 package app.ochiai.gil.chat
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -7,8 +9,12 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import app.ochiai.gil.chat.databinding.ActivityMainBinding
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener {
             saveTimePreferences()
+            setAlarmsForWeekdays()
             navigateToIconSettingActivity()
         }
     }
@@ -68,5 +75,44 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToIconSettingActivity() {
         val intent = Intent(this, IconSettingActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setAlarmsForWeekdays() {
+        val sharedPref = getSharedPreferences("WeekdayTimes", Context.MODE_PRIVATE)
+        setWorkRequestForChat(Calendar.MONDAY, sharedPref.getString("MondayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.TUESDAY, sharedPref.getString("TuesdayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.WEDNESDAY, sharedPref.getString("WednesdayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.THURSDAY, sharedPref.getString("ThursdayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.FRIDAY, sharedPref.getString("FridayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.SATURDAY, sharedPref.getString("SaturdayTime", "--:--") ?: "--:--")
+        setWorkRequestForChat(Calendar.SUNDAY, sharedPref.getString("SundayTime", "--:--") ?: "--:--")
+    }
+
+    private fun setWorkRequestForChat(dayOfWeek: Int, time: String) {
+        if (time == "--:--") return // 時間が設定されていない場合は何もしない
+
+        val hour = time.split(":")[0].toInt()
+        val minute = time.split(":")[1].toInt()
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+            // 現在時刻より前の場合は、次の週に設定
+            if (before(Calendar.getInstance())) {
+                add(Calendar.DAY_OF_YEAR, 7)
+            }
+        }
+
+        // 現在時刻から指定時刻までの遅延時間を計算
+        val delay = calendar.timeInMillis - System.currentTimeMillis()
+
+        // WorkRequest を作成
+        val workRequest = OneTimeWorkRequestBuilder<SendMessageWorker>()
+            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+            .build()
+
+        // WorkManager に WorkRequest をスケジュール
+        WorkManager.getInstance(applicationContext).enqueue(workRequest)
     }
 }

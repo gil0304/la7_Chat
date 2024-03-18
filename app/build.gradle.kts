@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
+    id("deploygate")
     id("org.jetbrains.kotlin.android")
 }
 

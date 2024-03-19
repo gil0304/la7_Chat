@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.ochiai.gil.chat.databinding.ActivityChatBinding
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 
@@ -47,14 +49,21 @@ class ChatActivity : AppCompatActivity() {
 
     private fun callChatGPT(message: String) {
         val client = OkHttpClient()
-        val requestBody = FormBody.Builder()
-            .add("message", message)
-            .build()
+        val jsonMediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+        val jsonBody = """
+            {
+                "model": "gpt-4-turbo-preview",
+                "messages": [{"role": "user", "content": "$message"},{"role": "user", "content": "友達口調で会話して"}]
+            }
+        """.trimIndent()
+        val requestBody = jsonBody.toRequestBody(jsonMediaType)
         val request = Request.Builder()
             .url("https://api.openai.com/v1/chat/completions")
             .post(requestBody)
             .addHeader("Authorization", "Bearer ${BuildConfig.OPENAI_API_KEY}")
             .build()
+
+        println(request)
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -87,7 +96,8 @@ class ChatActivity : AppCompatActivity() {
         val choicesArray = jsonObject.getJSONArray("choices")
         if (choicesArray.length() > 0) {
             val firstChoice = choicesArray.getJSONObject(0)
-            return firstChoice.getString("text")
+            val messageObject = firstChoice.getJSONObject("message")
+            return messageObject.getString("content")
         }
 
         return "No response"

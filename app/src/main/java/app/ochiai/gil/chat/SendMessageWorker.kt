@@ -15,7 +15,7 @@ class SendMessageWorker (appContext: Context, workerParams: WorkerParameters):
 
     private fun sendChantMessage(message: String) {
         val intent = Intent(applicationContext, ChatActivity::class.java).apply {
-            putExtra("message", message)
+            putExtra("automessage", message)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         applicationContext.startActivity(intent)

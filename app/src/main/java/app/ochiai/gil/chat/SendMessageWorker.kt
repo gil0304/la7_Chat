@@ -9,16 +9,16 @@ import androidx.work.WorkerParameters
 class SendMessageWorker (appContext: Context, workerParams: WorkerParameters):
         Worker(appContext, workerParams){
     override fun doWork(): Result {
-        sendChantMessage("Hello! This is a test message from WorkManager.")
-        return Result.success()
-    }
+        val sharedPref = applicationContext.getSharedPreferences("Icon", Context.MODE_PRIVATE)
+        val imageUrl = sharedPref.getString("ImageUrl", "")
 
-    private fun sendChantMessage(message: String) {
         val intent = Intent(applicationContext, ChatActivity::class.java).apply {
-            putExtra("automessage", message)
+            putExtra("autoMessage", "おはよー") // テキストメッセージ
+            putExtra("imageUrl", imageUrl) // 画像 URL
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         applicationContext.startActivity(intent)
         Log.d("SendMessageWorker", "チャットメッセージを送信")
+        return Result.success()
     }
 }

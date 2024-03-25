@@ -1,10 +1,12 @@
 package app.ochiai.gil.chat
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.ochiai.gil.chat.databinding.ItemMessageReceivedBinding
 import app.ochiai.gil.chat.databinding.ItemMessageSentBinding
+import com.squareup.picasso.Picasso
 
 class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val viewTypeMessageSent = 1
@@ -31,9 +33,25 @@ class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<Re
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = messages[position]
         if (holder is ReceivedMessageViewHolder) {
-            holder.binding.textView.text = message.text
+            if (message.isImage) {
+                holder.binding.imageView.visibility = View.VISIBLE
+                holder.binding.textView.visibility = View.GONE
+                Picasso.get().load(message.text).into(holder.binding.imageView)
+            } else {
+                holder.binding.imageView.visibility = View.GONE
+                holder.binding.textView.visibility = View.VISIBLE
+                holder.binding.textView.text = message.text
+            }
         } else if (holder is SentMessageViewHolder) {
-            holder.binding.textView.text = message.text
+            if (message.isImage) {
+                holder.binding.imageView.visibility = View.VISIBLE
+                holder.binding.textView.visibility = View.GONE
+                Picasso.get().load(message.text).into(holder.binding.imageView)
+            } else {
+                holder.binding.imageView.visibility = View.GONE
+                holder.binding.textView.visibility = View.VISIBLE
+                holder.binding.textView.text = message.text
+            }
         }
     }
 

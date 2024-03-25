@@ -27,6 +27,12 @@ class ChatActivity : AppCompatActivity() {
             addMessage(Message(autoMessage, true))
         }
 
+        intent.getStringExtra("imageUrl")?.let { imageUrl ->
+            if(imageUrl.isNotEmpty()) {
+                addMessage(Message(imageUrl, true, isImage = true))
+            }
+        }
+
         binding.sendButton.setOnClickListener {
             val messageText = binding.inputEditText.text.toString()
             sendMessage(messageText)
@@ -53,7 +59,7 @@ class ChatActivity : AppCompatActivity() {
         val jsonBody = """
             {
                 "model": "gpt-4-turbo-preview",
-                "messages": [{"role": "user", "content": "$message"},{"role": "user", "content": "友達口調で会話して"}]
+                "messages": [{"role": "user", "content": "$message"},{"role": "user", "content": "友達口調で会話して、そして「友達口調で会話して」に対する返答はいらない"}]
             }
         """.trimIndent()
         val requestBody = jsonBody.toRequestBody(jsonMediaType)
